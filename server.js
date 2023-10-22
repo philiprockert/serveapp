@@ -40,7 +40,7 @@ app.post('/crear-datos', (req, res) => {
 
 
 
-app.get('/obtener-datos', (req, res) => {
+app.get('/', (req, res) => {
   const consultaSQL = 'SELECT * FROM usuario';
   connection.query(consultaSQL, (err, resultados) => {
     if (err) {
