@@ -2,7 +2,7 @@ const express= require('express')
 const mysql = require('mysql2')
 const bodyParser = require('body-parser')
 const app = express()
-
+const PORT = 8080
 const connection = mysql.createConnection({
   host: 'containers-us-west-183.railway.app',
   port: '5439',
@@ -52,5 +52,5 @@ app.get('/', (req, res) => {
   });
 });
 
-
+app.listen(PORT)
 
