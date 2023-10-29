@@ -5,6 +5,12 @@ const app = express()
 require('dotenv').config();
 
 const PORT = 8080
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5173');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 app.use(bodyParser.json());
 
 function obtenerDatosDesdeBD(callback) {
@@ -53,16 +59,6 @@ function insertarDatosEnBD(datos, callback) {
   });
 }
 // Luego, puedes utilizar la función obtenerDatosDesdeBD en tu ruta de Express
-
-
-
-
-
-
-
-
-
-
 app.post('/crear-datos', (req, res) => {
   const { nombre, email, password } = req.body;
 
@@ -75,8 +71,6 @@ app.post('/crear-datos', (req, res) => {
     }
   });
 });
-
-
 
 app.get('/', (req, res) => {
   obtenerDatosDesdeBD((err, resultados) => {
