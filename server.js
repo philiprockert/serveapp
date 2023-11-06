@@ -1,8 +1,11 @@
 const express= require('express')
 const mysql = require('mysql2')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const app = express()
 require('dotenv').config();
+app.use(cors());
+
 const PORT = 8080
 
 const pool = mysql.createPool(dbConfig);
