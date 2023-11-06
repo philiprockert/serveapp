@@ -4,7 +4,12 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express()
 require('dotenv').config();
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Si necesitas enviar cookies o credenciales
+}));
+
 
 const PORT = 8080
 
