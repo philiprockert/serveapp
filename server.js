@@ -5,6 +5,9 @@ const app = express()
 require('dotenv').config();
 const PORT = 8080
 
+const pool = mysql.createPool(dbConfig);
+
+const promisePool = pool.promise();
 
 
 app.use(bodyParser.json());
@@ -32,7 +35,7 @@ function obtenerDatosDesdeBD(callback) {
 }
 // Función para insertar datos en la base de datos
 function insertarDatosEnBD(datos, callback) {
-  const db = mysql.createConnection({ host: process.env.DBHOST,
+  const db = mysql.promisePool({ host: process.env.DBHOST,
     port: process.env.DBPORT,
     user: process.env.DBUSER,
     password: process.env.DBPASS,
@@ -44,7 +47,7 @@ function insertarDatosEnBD(datos, callback) {
     if (err) {
       callback(err, null);
     } else {
-      const { nombre, email, password } = datos;
+      const {nombre, email, password } = datos;
       const consultaSQL = 'INSERT INTO usuario (nombre, email, password) VALUES (?, ?, ?)';
       
       db.query(consultaSQL, [nombre, email, password], (err, resultado) => {
@@ -56,12 +59,12 @@ function insertarDatosEnBD(datos, callback) {
 }
 // Luego, puedes utilizar la función obtenerDatosDesdeBD en tu ruta de Express
 app.post('/crear-datos', (req, res) => {
-  const { nombre, email, password } = req.body;
+  const {id,  nombre, email, password } = req.body;
 
-  insertarDatosEnBD({ nombre, email, password }, (err, resultado) => {
+  insertarDatosEnBD({id,  nombre, email, password }, (err, resultado) => {
     if (err) {
       console.error('Error al insertar datos en la base de datos: ' + err);
-      res.status(500).json({ error: 'Error interno del servidor' });
+      res.status(500).json({ error: 'Error interno del servidor' + err });
     } else {
       res.json({ mensaje: 'Datos insertados con éxito' });
     }
