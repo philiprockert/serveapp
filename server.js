@@ -5,13 +5,13 @@ const cors = require('cors');
 const app = express();
 require('dotenv').config();
 
+//app.use(cors({
+ // origin: 'http://localhost:5173',
+  //methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  //credentials: true,
+//}));
 app.use(cors({
-  origin: 'http://localhost:5173',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
-app.use(cors({
-  origin: 'https://lively-horse-6aab78.netlify.app/create',
+  origin: 'https://lively-horse-6aab78.netlify.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
