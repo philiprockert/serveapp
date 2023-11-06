@@ -11,7 +11,7 @@ app.use(cors({
   credentials: true,
 }));
 app.use(cors({
-  origin: 'https://lively-horse-6aab78.netlify.app',
+  origin: 'https://lively-horse-6aab78.netlify.app/create',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
